@@ -119,7 +119,11 @@ async function onSubmit() {
 			title: i18n.baseText('folders.delete.success.message'),
 			message,
 		});
-		props.data.workflowListEventBus.emit('folder-deleted', { folderId: props.activeId });
+		props.data.workflowListEventBus.emit('folder-deleted', {
+			folderId: props.activeId,
+			workflowCount: props.data.content.workflowCount,
+			folderCount: props.data.content.subFolderCount,
+		});
 		modalBus.emit('close');
 	} catch (error) {
 		showError(error, i18n.baseText('folders.delete.error.message'));
@@ -172,24 +176,6 @@ const onFolderSelected = (payload: { id: string; name: string }) => {
 							:parent-folder-id="currentFolder?.parentFolder?.id"
 							@folder:selected="onFolderSelected"
 						/>
-						<!-- <N8nSelect
-							v-model="selectedFolderId"
-							option-label="name"
-							option-value="id"
-							:placeholder="i18n.baseText('folders.transfer.selectFolder')"
-						>
-							<N8nOption
-								v-for="folder in availableFolders"
-								:key="folder.id"
-								:value="folder.id"
-								:label="folder.name"
-							>
-								<div :class="$style['folder-select-item']">
-									<n8n-icon icon="folder" />
-									<span> {{ folder.name }}</span>
-								</div>
-							</N8nOption>
-						</N8nSelect> -->
 					</div>
 					<el-radio
 						v-model="operation"
