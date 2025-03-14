@@ -35,7 +35,7 @@ const getDeviationStyles = (d: number) => ({
 		<N8nLoading v-if="loading" :class="$style.loading" :cols="5" />
 		<ul v-else>
 			<li v-for="{ id, value, deviation, unit } in summary" :key="id">
-				<p>
+				<RouterLink class="insight-summary" :to="to" exact-active-class="insight-summary--active">
 					<strong>{{ summaryTitles[id] }}</strong>
 					<span v-if="value === 0 && id === 'timeSaved'" :class="$style.empty">
 						<em>--</em>
@@ -68,7 +68,7 @@ const getDeviationStyles = (d: number) => ({
 							{{ getSign(deviation) }}{{ deviation }}
 						</small>
 					</span>
-				</p>
+				</RouterLink>
 			</li>
 		</ul>
 	</div>
@@ -98,7 +98,7 @@ const getDeviationStyles = (d: number) => ({
 			padding: 0 var(--spacing-xl) 0 var(--spacing-l);
 		}
 
-		p {
+		a {
 			display: grid;
 
 			strong {
