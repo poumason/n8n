@@ -52,6 +52,15 @@ class RedisConfig {
 	/** Whether to enable TLS on Redis connections. */
 	@Env('QUEUE_BULL_REDIS_TLS')
 	tls: boolean = false;
+
+	/** Redis sentinel startup nodes, as comma-separated list of `{host}:{port}` pairs. @example 'redis-1:26379,redis-2:26379' */
+	@Env('QUEUE_BULL_REDIS_SENTINEL_NODES')
+	sentinelNodes: string = '';
+
+
+	/** Redis name. Redis 6.0 or higher required. */
+	@Env('QUEUE_BULL_REDIS_NAME')
+	name: string = '';
 }
 
 @Config
